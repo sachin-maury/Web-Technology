@@ -2,6 +2,7 @@
 function colorButtonHandler(color) {
     const messageElement = document.getElementById('message');
     messageElement.textContent = `You chose the color: ${color}`;
+    document.body.style.backgroundColor = `${color}`; // Green
 }
 
 // Assign event handlers to buttons
