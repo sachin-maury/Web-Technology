@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Finder</title>
+</head>
+<body>
+    <h1>User Finder</h1>
+    <input type="text" id="username" placeholder="Enter username">
+    <button onclick="getUser()">Get Details</button>
+    <div id="userDetails"></div>
+
+    <script>
+        function getUser() {
+            const username = document.getElementById('username').value;
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                const users = this.responseXML.getElementsByTagName('user');
+                let found = false;
+                for (let user of users) {
+                    if (user.getElementsByTagName('username')[0].textContent === username) {
+                        document.getElementById('userDetails').innerHTML = 
+                            `<strong>Name:</strong> ${user.getElementsByTagName('name')[0].textContent}<br>
+                             <strong>Email:</strong> ${user.getElementsByTagName('email')[0].textContent}`;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) document.getElementById('userDetails').innerHTML = "User not found.";
+            };
+            xhr.open("GET", "users.xml", true);
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
