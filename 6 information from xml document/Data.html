@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info</title>
+    <script>
+        function loadXML(xmlFile) {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    processXML(this);
+                }
+            };
+            xmlhttp.open("GET", xmlFile, true);
+            xmlhttp.send();
+        }
+
+        function processXML(xml) {
+            let xmlDoc = xml.responseXML;
+            let users = xmlDoc.getElementsByTagName("user");
+            let name = document.f1.t1.value;
+            let count = 2;
+
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].getElementsByTagName("name")[0].textContent === name) {
+                    document.getElementById("t2").value = users[i].getElementsByTagName("passward")[0].textContent;
+                    document.getElementById("t3").value = users[i].getElementsByTagName("emailid")[0].textContent;
+                    document.getElementById("t4").value = users[i].getElementsByTagName("phone")[0].textContent;
+                    document.getElementById("t5").value = users[i].getElementsByTagName("gander")[0].textContent;
+                    document.getElementById("t6").value = users[i].getElementsByTagName("DOB")[0].textContent;
+                    document.getElementById("t7").value = users[i].getElementsByTagName("language")[0].textContent;
+                    break;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <form name="f1">
+        <table border="0">
+            <tr>
+                <td>ENTER NAME:</td>
+                <td><input type="text" name="t1"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="search" onclick="loadXML('xmlfile.xml')"></td>
+            </tr>
+            <tr>
+                <td>YOUR PASSWORD</td>
+                <td><input type="password" id="t2"></td>
+            </tr>
+            <tr>
+                <td>YOUR EMAIL ID</td>
+                <td><input type="text" id="t3"></td>
+            </tr>
+            <tr>
+                <td>YOUR PHONE NUMBER</td>
+                <td><input type="text" id="t4"></td>
+            </tr>
+            <tr>
+                <td>YOUR GENDER</td>
+                <td><input type="text" id="t5"></td>
+            </tr>
+            <tr>
+                <td>YOUR DOB</td>
+                <td><input type="text" id="t6"></td>
+            </tr>
+            <tr>
+                <td>YOUR LANGUAGE</td>
+                <td><input type="text" id="t7"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
