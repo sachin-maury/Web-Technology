@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Hover and Click Example</title>
+    <style>
+        #hover-message {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Image Hover and Click Example</h1>
+    <img id="myImage" src="https://via.placeholder.com/300" alt="Sample Image" style="width: 300px; cursor: pointer;">
+    <div id="hover-message">Hovering over the image!</div>
+
+    <script>
+        const image = document.getElementById('myImage');
+        const message = document.getElementById('hover-message');
+
+        image.addEventListener('mouseover', (event) => {
+            message.style.display = 'block';
+            message.style.left = `${event.pageX}px`;
+            message.style.top = `${event.pageY}px`;
+        });
+
+        image.addEventListener('mousemove', (event) => {
+            message.style.left = `${event.pageX}px`;
+            message.style.top = `${event.pageY}px`;
+        });
+
+        image.addEventListener('mouseout', () => {
+            message.style.display = 'none';
+        });
+
+        message.addEventListener('click', (event) => {
+            const x = event.clientX;
+            const y = event.clientY;
+            alert(`Mouse Coordinates: X: ${x}, Y: ${y}`);
+        });
+    </script>
+
+</body>
+</html>
